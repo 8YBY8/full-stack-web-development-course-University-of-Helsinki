@@ -25,15 +25,23 @@ const App = () => {
   
   var point = new Array(anecdotes.length+1).join('0').split('').map(parseFloat) 
   const [points, setPoints] = useState(point)
+
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
+
+  let maxPoint = points.indexOf(Math.max(...points));
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       {anecdotes[selected]} <br />
       has {points[selected]} votes <br />
-      <button onClick={() => setPoints(updatePoints({selected, points}))}>vote</button> {points[selected]}
+      <button onClick={() => setPoints(updatePoints({selected, points}))}>vote</button> 
       <button onClick={() => setSelected(getRandomInt(anecdotes.length))}>next anecdote</button>
+
+      <h1>Anecdote with most votes</h1>
+      {anecdotes[maxPoint]} <br />
+      has {points[maxPoint]} votes <br />
     </div>
   )
 }
