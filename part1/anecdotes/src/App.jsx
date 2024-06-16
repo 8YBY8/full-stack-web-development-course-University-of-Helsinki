@@ -1,5 +1,14 @@
 import { useState } from 'react'
 
+const updatePoints = ({selected, points}) => {
+  const copy = [...points]
+  // increment the value in position selected by one
+  copy[selected] += 1
+  return (
+    copy
+  )
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -13,14 +22,17 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  
+  var point = new Array(anecdotes.length+1).join('0').split('').map(parseFloat) 
+  const [points, setPoints] = useState(point)
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
-  // console.log(selected);
-  
   return (
     <div>
       {anecdotes[selected]} <br />
+      has {points[selected]} votes <br />
+      <button onClick={() => setPoints(updatePoints({selected, points}))}>vote</button> {points[selected]}
       <button onClick={() => setSelected(getRandomInt(anecdotes.length))}>next anecdote</button>
     </div>
   )
