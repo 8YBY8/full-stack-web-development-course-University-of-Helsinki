@@ -39,6 +39,7 @@
 
 //   return (
 //     <div>
+//       test
 //       <Header course={course} />
 //       <Content parts={parts} />
 //       <Total sum={parts[0].exercises + parts[1].exercises + parts[2].exercises} />
@@ -48,8 +49,7 @@
 
 // export default App
 
-
-import { Course } from './components/Course'
+import Course from './components/Course'
 const App = () => {
   const course = {
     id: 1,
@@ -75,3 +75,13 @@ const App = () => {
 
   return <Course course={course} />
 }
+
+export default App
+
+// App
+//   Course
+//     Header
+//     Content
+//       Part
+//       Part
+//       ...
