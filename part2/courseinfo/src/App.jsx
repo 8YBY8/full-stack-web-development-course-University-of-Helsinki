@@ -75,17 +75,6 @@ const App = () => {
     ]
   }
 
-  // console.log(course.parts);
-  // const parts = course.parts
-  // const total = parts.reduce((s, p) => {
-  //   console.log(s.exercises);
-  //   console.log(p.exercises);
-  //   console.log('what is happening', s, p)
-    
-  //   // return total
-  // })
-  // console.log(total);
-
   return <Course course={course} />
 }
 

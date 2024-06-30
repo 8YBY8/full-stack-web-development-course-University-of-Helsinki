@@ -1,10 +1,14 @@
 const Total = ({ parts }) => {
-    // console.log(parts);
-    var total = 0
+    let partsExercises = []
     for (let i = 0; i < parts.length; i++) {
-        // console.log(parts[i].exercises);
-        total += parts[i].exercises
+        partsExercises.push(parts[i].exercises)
     }
+
+    const total = partsExercises.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0,
+    );
+
     return(
         <div>
             <b>total of {total} exercises</b>
