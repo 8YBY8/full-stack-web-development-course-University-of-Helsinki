@@ -1,9 +1,3 @@
-const Part = ({ part }) => {
-    return(
-        <div>
-            <p>{part.name} {part.exercises}</p>
-        </div>
-    )
-}
+const Part = ({ part }) => <p key={part.id}>{part.name} {part.exercises}</p>
 
 export default Part
