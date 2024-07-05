@@ -1,4 +1,5 @@
 import { useState } from 'react'
+<script src="lodash.js"></script>
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -6,9 +7,18 @@ const App = () => {
   ]) 
   const [newName, setNewName] = useState('')
 
+  const isExist = () => {
+    persons.map((person) =>
+      person.name === newName ? True : False
+    )
+  }
+
   const addName = (event) => {
     event.preventDefault()
     console.log('button clicked', event.target)
+    if(isExist){
+      return window.alert(`${newName} is already added to phonebook`);
+    }
     const nameObject = {
       name: newName,
     }
