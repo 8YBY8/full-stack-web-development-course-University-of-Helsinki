@@ -1,26 +1,26 @@
 import { useState } from 'react'
-<script src="lodash.js"></script>
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas',
+      number: '040-1234567'
+    }
   ]) 
   const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
 
-  const isExist = () => {
-    persons.map((person) =>
-      person.name === newName ? True : False
-    )
-  }
-
-  const addName = (event) => {
+  const addPerson = (event) => {
     event.preventDefault()
     console.log('button clicked', event.target)
-    if(isExist){
-      return window.alert(`${newName} is already added to phonebook`);
+
+    const nameExists = persons.some(person => person.name === newName)
+    if (nameExists) {
+      return window.alert(`${newName} is already added to phonebook`)
     }
+
     const nameObject = {
       name: newName,
+      number: newNumber,
     }
 
     setPersons(persons.concat(nameObject))
@@ -29,21 +29,36 @@ const App = () => {
 
   // To enable editing of the input element, we have to register an event handler
   // that synchronizes the changes made to the input with the component's state
-const handleNameChange = (event) => {
-  console.log(event.target.value)
-  setNewName(event.target.value)
-}
+  const handleNameChange = (event) => {
+    console.log(event.target.value)
+    setNewName(event.target.value)
+  }
+
+  const handleNumberChange = (event) => {
+    console.log(event.target.value);
+    setNewNumber(event.target.value)
+  }
+
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <form onSubmit={addName}>
+      <form onSubmit={addPerson}>
         <div>
-          name: <input 
+          name: 
+          <input 
             value={newName} 
             onChange={handleNameChange}
-            />
+          />
         </div>
+        <div>
+          number: 
+          <input 
+            value={newNumber}
+            onChange={handleNumberChange}
+          />
+        </div>
+        <div>Debug: {newName}</div>
         <div>
           <button type="submit">add</button>
         </div>
@@ -51,7 +66,7 @@ const handleNameChange = (event) => {
       <h2>Numbers</h2>
       <div>
         {persons.map((person) => 
-          <div key={person.name}>{person.name}</div>
+          <div key={person.name}>{person.name} {person.number}</div>
           )}
       </div>
     </div>
