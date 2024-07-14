@@ -1,4 +1,5 @@
 // the form for adding new people to the phonebook
+import axios from 'axios'
 const PersonForm = ({ persons, setPersons, newName, setNewName, newNumber, setNewNumber, handleNameChange, handleNumberChange }) => {
     const addPerson = (event) => {
       event.preventDefault();
@@ -14,9 +15,17 @@ const PersonForm = ({ persons, setPersons, newName, setNewName, newNumber, setNe
         number: newNumber,
       };
   
-      setPersons(persons.concat(nameObject));
-      setNewName('');
-      setNewNumber('');
+      // setPersons(persons.concat(nameObject));
+      // setNewName('');
+      // setNewNumber('');
+
+      axios
+        .post('http://localhost:3001/persons', nameObject)
+        .then(response => {
+          setPersons(persons.concat(response.data))
+          setNewName('')
+          setNewNumber('');
+        })
     };
   
     return (
