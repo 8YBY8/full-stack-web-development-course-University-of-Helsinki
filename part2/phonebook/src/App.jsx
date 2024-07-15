@@ -36,15 +36,37 @@ const App = () => {
     filter === '' ? setShowAll(true) : setShowAll(false)
   }
 
+  const addPerson = (event) => {
+    event.preventDefault();
+    console.log('button clicked', event.target);
+
+    const nameExists = persons.some(person => person.name === newName);
+    if (nameExists) {
+      return window.alert(`${newName} is already added to phonebook`);
+    }
+
+    const nameObject = {
+      name: newName,
+      number: newNumber,
+    };
+
+    axios
+      .post('http://localhost:3001/persons', nameObject)
+      .then(response => {
+        setPersons(persons.concat(response.data))
+        setNewName('')
+        setNewNumber('');
+      })
+  };
+
   return (
     <div>
       <h2>Phonebook</h2>
       <Filter filter={filter} handleFilterChange={handleFilterChange}/>
       <h3>Add a new</h3>
       <PersonForm 
-        persons={persons} setPersons={setPersons} newName={newName} 
-        setNewName={setNewName} newNumber={newNumber} setNewNumber={setNewNumber} 
-        handleNameChange={handleNameChange} handleNumberChange={handleNumberChange}
+        addPerson={addPerson} newName={newName} 
+        newNumber={newNumber} handleNameChange={handleNameChange} handleNumberChange={handleNumberChange}
       />
       <h3>Numbers</h3>
       <Persons persons={persons} showAll={showAll} filter={filter} />
