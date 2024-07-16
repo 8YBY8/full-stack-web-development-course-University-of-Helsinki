@@ -16,6 +16,11 @@ const update = (id, newObject) => {
   return request.then((response) => response.data);
 };
 
+const remove = (id) => {
+    const request = axios.delete(`${baseUrl}/${id}`);
+    return request.then((response) => response.data);
+}
+
 // changed to the ES6 feature that making slightly more compact way of 
 // defining objects using variables
-export default { getAll, create, update };
+export default { getAll, create, update, remove };
