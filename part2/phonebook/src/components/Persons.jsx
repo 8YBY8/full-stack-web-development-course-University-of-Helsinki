@@ -1,19 +1,23 @@
-// renders all people from the phonebook
-import Contant from "./Content";
-import Remove from "./Remove";
-const Persons = ({ persons, showAll, filter}) => {
+import Contant from "./Content"
+import Remove from "./Remove"
+
+const Persons = ({ persons, showAll, filter, handleDeletePerson }) => {
   const personsToShow = showAll
-  ? persons
-  : persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
+    ? persons
+    : persons.filter((person) =>
+        person.name.toLowerCase().includes(filter.toLowerCase())
+      )
+
   return (
     <div>
-      {personsToShow.map(person => 
-        <Contant key={person.id} person={person}/>
-        <Remove key={person.id} id={person.id}/>
-        // <Remove key={person.id} id={person.id} />
-      )}
+      {personsToShow.map((person) => (
+        <div key={person.id}>
+          <Contant person={person} />
+          <Remove id={person.id} handleDeletePerson={handleDeletePerson} />
+        </div>
+      ))}
     </div>
-  )
-}
+  );
+};
 
 export default Persons

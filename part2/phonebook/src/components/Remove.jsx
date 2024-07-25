@@ -1,13 +1,7 @@
-
-const Remove = (id) => {
-    // event.preventDefault();
-    // console.log('delete button clicked', event.target);
-
+const Remove = ({ id, handleDeletePerson }) => {
     return (
-        <div>
-            <button>delete</button>
-        </div>
+        <button key={id} onClick={() => handleDeletePerson(id)}>delete</button>
     )
 }
 
-export default Remove
+export default Remove;
