@@ -5,7 +5,7 @@ const Content = ({ person, handleDeletePerson }) => {
     return (
         <div key={person.id}>
             {person.name} {person.number} 
-            <Remove person={person} handleDeletePerson={handleDeletePerson}/>
+            <Remove id={person.id} handleDeletePerson={handleDeletePerson}/>
         </div>
     )
 }

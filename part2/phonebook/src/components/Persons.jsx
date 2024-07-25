@@ -12,8 +12,7 @@ const Persons = ({ persons, showAll, filter, handleDeletePerson }) => {
     <div>
       {personsToShow.map((person) => (
         <div key={person.id}>
-          <Contant person={person} />
-          <Remove id={person.id} handleDeletePerson={handleDeletePerson} />
+          <Contant person={person} handleDeletePerson={handleDeletePerson} />
         </div>
       ))}
     </div>
