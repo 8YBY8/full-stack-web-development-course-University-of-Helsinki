@@ -1,7 +1,3 @@
-const Remove = ({ id, handleDeletePerson }) => {
-    return (
-        <button key={id} onClick={() => handleDeletePerson(id)}>delete</button>
-    )
-}
+const Remove = ({ id, handleDeletePerson }) => <button key={id} onClick={() => handleDeletePerson(id)}>delete</button>
 
 export default Remove;

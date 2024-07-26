@@ -4,7 +4,7 @@ const PersonForm = ({ addPerson, newName, newNumber, handleNameChange, handleNum
   
     return (
       <div>
-        <form onSubmit={addPerson}>
+        <form onSubmit={addPerson} >
           <div>
             Name: 
             <input 

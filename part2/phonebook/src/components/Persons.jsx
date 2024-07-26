@@ -1,5 +1,4 @@
 import Contant from "./Content"
-import Remove from "./Remove"
 
 const Persons = ({ persons, showAll, filter, handleDeletePerson }) => {
   const personsToShow = showAll
