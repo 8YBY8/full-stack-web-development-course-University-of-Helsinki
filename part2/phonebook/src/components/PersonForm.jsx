@@ -1,5 +1,4 @@
 // the form for adding new people to the phonebook
-// import axios from 'axios'
 const PersonForm = ({ addPerson, newName, newNumber, handleNameChange, handleNumberChange }) => {
   
     return (

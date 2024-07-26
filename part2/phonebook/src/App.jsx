@@ -3,6 +3,7 @@ import Persons from "./components/Persons";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import personService from "./services/persons";
+import Notification from "./components/Notification";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -10,6 +11,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [filter, setFilter] = useState("");
+  const [successfulMesssage, setSuccessfulMesssage] = useState(null)
 
   // load the initial persons informations
   useEffect(() => {
@@ -58,39 +60,50 @@ const App = () => {
       name: newName,
       number: newNumber,
     };
-
-    const nameExists = persons.find((person) => person.name === newName);
-    if (nameExists) {
-      if(window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
-        const changedPerson = {...nameExists, number: newNumber}
-        
+    if(personObject.name && personObject.number){
+      const nameExists = persons.find((person) => person.name === newName);
+      if (nameExists) {
+        if(window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+          const changedPerson = {...nameExists, number: newNumber}
+          
+          personService
+            .update(nameExists.id, changedPerson)
+            .then(returnedPerson => {
+              setPersons(persons.map(p => p.id !== nameExists.id ? p : returnedPerson))
+              setNewName("");
+              setNewNumber("");
+              setSuccessfulMesssage(`Number changed ${nameExists.name}`)
+              setTimeout(() => {
+                setSuccessfulMesssage(null)
+              }, 3000)
+            })
+            .catch(error => {
+              alert(`${newName} is already deleted`)
+              setPersons(persons.filter(person => person.id !== nameExists.id))
+            })
+        }
+      } else {
         personService
-          .update(nameExists.id, changedPerson)
-          .then(returnedPerson => {
-            setPersons(persons.map(p => p.id !== nameExists.id ? p : returnedPerson))
+          .create(personObject)
+          .then((returnedPerson) => {
+            setPersons(persons.concat(returnedPerson));
             setNewName("");
             setNewNumber("");
-          })
-          .catch(error => {
-            alert(`${newName} is already deleted`)
-            setPersons(persons.filter(person => person.id !== nameExists.id))
-          })
+            setSuccessfulMesssage(`Added ${personObject.name}`)
+            setTimeout(() => {
+              setSuccessfulMesssage(null)
+            }, 3000)
+        });
       }
-    } else {
-      personService
-        .create(personObject)
-        .then((returnedPerson) => {
-          setPersons(persons.concat(returnedPerson));
-          setNewName("");
-          setNewNumber("");
-      });
     }
+    
   };
   
 
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={successfulMesssage} />
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
       <h3>Add a new</h3>
       <PersonForm
