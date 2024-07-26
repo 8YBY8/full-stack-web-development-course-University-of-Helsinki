@@ -82,10 +82,6 @@ const App = () => {
                 setSuccessfulMesssage(null)
               }, 3000)
             })
-            // .catch(error => {
-            //   alert(`${newName} is already deleted`)
-            //   setPersons(persons.filter(person => person.id !== nameExists.id))
-            // })
         }
       } else {
         personService
