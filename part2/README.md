@@ -4,4 +4,4 @@ Solutions of part 2 exercises to this folder, one app per folder
 - the project phonebook for exercises 2.6 - 2.14 as folder phonebook
  
 
-21 hrs 
+24 hrs 
